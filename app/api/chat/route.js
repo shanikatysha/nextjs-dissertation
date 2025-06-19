@@ -19,7 +19,7 @@ export async function POST(request) {
     });
   } catch (error) {
     return Response.json({ 
-      error: "Failed to get AI response" 
+      error: "Failed to fetch AI response" 
     }, { status: 500 });
   }
 }
