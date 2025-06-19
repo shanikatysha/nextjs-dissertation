@@ -1,103 +1,209 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from 'react';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [prompt, setPrompt] = useState('');
+  const [chatInput, setChatInput] = useState('');
+  const [generatedImage, setGeneratedImage] = useState<string | null>(null);
+  const [chatResponse, setChatResponse] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState<'chat' | 'image'>('chat');
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const handleChatSubmit = async () => {
+    if (!chatInput.trim()) return;
+
+    setLoading(true);
+    setChatResponse('');
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: chatInput }),
+      });
+
+      const data = await response.json();
+      
+      if (response.ok) {
+        setChatResponse(data.response);
+      } else {
+        setChatResponse(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      setChatResponse('Error: Failed to get response');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleImageSubmit = async () => {
+    if (!prompt.trim()) return;
+
+    setLoading(true);
+    setGeneratedImage(null);
+
+    try {
+      const response = await fetch('/api/generate-image', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt }),
+      });
+
+      const data = await response.json();
+      
+      if (response.ok) {
+        setGeneratedImage(data.imageUrl);
+      } else {
+        alert(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      alert('Error: Failed to generate image');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent, action: () => void) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      action();
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
+          OpenAI & DALL-E Integration
+        </h1>
+
+        {/* Tab Navigation */}
+        <div className="flex justify-center mb-8">
+          <div className="bg-white rounded-lg p-1 shadow-md">
+            <button
+              onClick={() => setActiveTab('chat')}
+              className={`px-6 py-2 rounded-md font-medium transition-colors ${
+                activeTab === 'chat'
+                  ? 'bg-blue-500 text-white'
+                  : 'text-gray-600 hover:text-blue-500'
+              }`}
+            >
+              💬 Chat with AI
+            </button>
+            <button
+              onClick={() => setActiveTab('image')}
+              className={`px-6 py-2 rounded-md font-medium transition-colors ${
+                activeTab === 'image'
+                  ? 'bg-blue-500 text-white'
+                  : 'text-gray-600 hover:text-blue-500'
+              }`}
+            >
+              🎨 Generate Images
+            </button>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Chat Tab */}
+        {activeTab === 'chat' && (
+          <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+              Chat with OpenAI
+            </h2>
+            <div className="space-y-4">
+              <div>
+                <textarea
+                  value={chatInput}
+                  onChange={(e) => setChatInput(e.target.value)}
+                  onKeyPress={(e) => handleKeyPress(e, handleChatSubmit)}
+                  placeholder="Ask me anything... (Press Enter to send)"
+                  className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
+                  rows={3}
+                  disabled={loading}
+                />
+              </div>
+              <button
+                onClick={handleChatSubmit}
+                disabled={loading || !chatInput.trim()}
+                className="w-full bg-blue-500 text-white py-3 px-4 rounded-md hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed font-medium transition-colors"
+              >
+                {loading ? 'Thinking...' : 'Ask AI'}
+              </button>
+            </div>
+
+            {chatResponse && (
+              <div className="mt-6 p-4 bg-gray-50 rounded-md">
+                <h3 className="font-semibold text-gray-800 mb-2">AI Response:</h3>
+                <p className="text-gray-700 whitespace-pre-wrap">{chatResponse}</p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Image Generation Tab */}
+        {activeTab === 'image' && (
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+              Generate Images with DALL-E
+            </h2>
+            <div className="space-y-4">
+              <div>
+                <textarea
+                  value={prompt}
+                  onChange={(e) => setPrompt(e.target.value)}
+                  onKeyPress={(e) => handleKeyPress(e, handleImageSubmit)}
+                  placeholder="Describe the image you want to generate... (Press Enter to generate)"
+                  className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
+                  rows={3}
+                  disabled={loading}
+                />
+              </div>
+              <button
+                onClick={handleImageSubmit}
+                disabled={loading || !prompt.trim()}
+                className="w-full bg-green-500 text-white py-3 px-4 rounded-md hover:bg-green-600 disabled:bg-gray-400 disabled:cursor-not-allowed font-medium transition-colors"
+              >
+                {loading ? 'Generating...' : 'Generate Image'}
+              </button>
+            </div>
+
+            {generatedImage && (
+              <div className="mt-6">
+                <h3 className="font-semibold text-gray-800 mb-3">Generated Image:</h3>
+                <div className="flex flex-col items-center">
+                  <img
+                    src={generatedImage}
+                    alt="Generated by DALL-E"
+                    className="max-w-full h-auto rounded-lg shadow-md"
+                  />
+                  <a
+                    href={generatedImage}
+                    download="generated-image.png"
+                    className="mt-3 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors inline-block"
+                  >
+                    Download Image
+                  </a>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Instructions */}
+        {/* <div className="mt-8 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+          <h3 className="font-semibold text-yellow-800 mb-2">Setup Instructions:</h3>
+          <ol className="list-decimal list-inside text-yellow-700 space-y-1">
+            <li>Install OpenAI: <code className="bg-yellow-100 px-1 rounded">npm install openai</code></li>
+            <li>Add your OpenAI API key to environment variables</li>
+            <li>Create the API routes (chat.js and generate-image.js)</li>
+            <li>Deploy to Vercel with environment variables set</li>
+          </ol>
+        </div> */}
+      </div>
     </div>
   );
 }
