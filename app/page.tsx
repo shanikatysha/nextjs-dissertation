@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import Link from 'next/link'
 
 export default function Home() {
   const [prompt, setPrompt] = useState('');
@@ -76,8 +77,15 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+    <div className="min-h-screen">
       <div className="max-w-4xl mx-auto">
+        <Link 
+          href="/question-prompt"
+          className="px-6 py-3 rounded-md font-medium"
+        >
+        🔍 Analyze Story Patterns
+        </Link>
+
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
           OpenAI & DALL-E Integration
         </h1>
@@ -192,17 +200,6 @@ export default function Home() {
             )}
           </div>
         )}
-
-        {/* Instructions */}
-        {/* <div className="mt-8 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-          <h3 className="font-semibold text-yellow-800 mb-2">Setup Instructions:</h3>
-          <ol className="list-decimal list-inside text-yellow-700 space-y-1">
-            <li>Install OpenAI: <code className="bg-yellow-100 px-1 rounded">npm install openai</code></li>
-            <li>Add your OpenAI API key to environment variables</li>
-            <li>Create the API routes (chat.js and generate-image.js)</li>
-            <li>Deploy to Vercel with environment variables set</li>
-          </ol>
-        </div> */}
       </div>
     </div>
   );
