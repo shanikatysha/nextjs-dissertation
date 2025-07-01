@@ -32,7 +32,7 @@ export default function Prompt() {
         }
     };
 
-    //handle button submit
+    // handle button submit
     const handleKeyPress = (e: React.KeyboardEvent) => {
         if (e.key === 'Enter' && e.ctrlKey) {
           e.preventDefault();

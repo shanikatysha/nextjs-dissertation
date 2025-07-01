@@ -1,13 +1,11 @@
 import { NextResponse } from "next/server";
 import Replicate from "replicate";
-import fs from "node:fs";
 
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN,
 });
 
 const generateEmotionalPrompt = (emotions, colors, overallTone) => {
-    // Much simpler prompt since your LoRA model already knows your style
     const prompt = `Create an abstract RORA artwork in a grainy cosmic motion style, radiating aura forms and futuristic patterns that depicts these emotions: ${emotions.join(', ')}. Use these colors: ${colors.join(', ')} make sure they are VIBRANT AND/OR PASTEL colors that create contrast with each other but still look harmonious. The background color should ALWAYS be deep black (#111111). Futuristic patterns color should ALWAYS be true white (#FFFFFF) to create contrast with the background and radiating auroras. AVOID rigid geometric patterns or grid-like radiating lines: aim for abstract particles, atom shapes, deformed line contours, spirals, and radials. Apply a soft outer glow and fading edges to create a sense of energy dissipation, but NEVER cover the futuristic pattern underneath. Play around with the opacity for the auroras for smooth color blending. Include slight asymmetry or dynamic imbalance to give a sense of natural energy rather than a mechanical, evenly spaced design. AVOID clean concentric symmetry and rigid geometric patterns; aim for overlapping waves, warped ellipses, and swirling halos. Incorporate light wireframe arcs or motion trails but keep the focus on textured radiating lines. Aim for a style that evokes celestial storms, cosmic bursts, or quantum energy halos.`;
     return prompt;
 };
@@ -22,7 +20,7 @@ export async function POST(request) {
     try {
         const { emotions, colors, overallTone } = await request.json();
 
-        // Validate inputs
+        // validate inputs
         if (!emotions || !Array.isArray(emotions) || emotions.length === 0) {
         return Response.json({ error: 'Emotions not found' }, {status : 400});
         }
@@ -35,11 +33,11 @@ export async function POST(request) {
         return Response.json({ error: 'Overall tone not found' }, {status : 400});
         }
 
-        // Generate the simplified prompt
+        // generate the simplified prompt
         const emotionalPrompt = generateEmotionalPrompt(emotions, colors, overallTone);
         console.log('Generated emotional prompt:', emotionalPrompt);
 
-        // Call Replicate with your fine-tuned model
+        // call Replicate
         const output = await replicate.run(
         "shanikatysha/aurora:cb9dd1c9407513be78ccd35628b5af731a7453f07adbac9aea18145bbe5ad591", 
         {

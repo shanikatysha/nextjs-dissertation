@@ -8,7 +8,7 @@ export default function Artwork () {
     const [isGenerating, setIsGenerating] = useState(false);
     const searchParams = useSearchParams();
 
-    // Get data from URL parameters
+    // get data from URL parameters
     const emotions = JSON.parse(searchParams.get('emotions') || '[]');
     const colors = JSON.parse(searchParams.get('colors') || '[]');
     const overallTone = searchParams.get('overallTone') || '';
@@ -16,7 +16,7 @@ export default function Artwork () {
     const generateArtwork = async () => {
         setIsGenerating(true);
     
-        //send the data TO the API
+        // send the data TO the API
         const response = await fetch('/api/predictions', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
