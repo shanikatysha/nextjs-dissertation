@@ -29,21 +29,21 @@ const NarrativeTextBox = ({ text, isVisible, title, animationPhase = 0, onNext }
       const timer = setTimeout(() => {
         setDisplayedText(text.slice(0, currentIndex + 1));
         setCurrentIndex(currentIndex + 1);
-      }, 40);
+      }, 80);
 
       return () => clearTimeout(timer);
     }
-  }, [text, currentIndex, isVisible, 40]);
+  }, [text, currentIndex, isVisible, 80]);
 
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-80 w-11/12 max-w-4xl">
+    <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-80 w-11/12 max-w-6xl">
       <div className="bg-black border-1 border-gray-500 rounded-lg p-6 shadow-2xl backdrop-blur-sm">
         {/* Retro header bar */}
         <div className="flex items-center justify-between mb-4 pb-2 border-b border-gray-600">
           <div className="text-gray-400 text-sm font-mono">
-          {title ? `CHAPTER ${animationPhase + 1}: ${title}` : "CHAPTER"}</div>
+          {title ? `STEP ${animationPhase + 1}: ${title}` : "STEP"}</div>
           {onNext && (
             <button
               onClick={onNext}

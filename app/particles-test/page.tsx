@@ -1,9 +1,13 @@
 "use client";
 
 import Particles from '../components/particles';
+import ParticlesFlashing from '../components/particles-flashing';
+import NeuralNetworkParticles from '../components/neural-network';
 import AnimationIn from '../components/rectangle-slide';
 import { useEffect, useRef, useState } from 'react';
 import NarrativeTextBox from '../components/narrative-box';
+import Loader from '../components/loading-heartbeat';
+import Instructions from '../components/instructions';
 
 export default function ParticlesTest() {
     const [animationPhase, setAnimationPhase] = useState(0);
@@ -11,16 +15,28 @@ export default function ParticlesTest() {
     useEffect(() => {
         const interval = setInterval(() => {
           setAnimationPhase((prev) => (prev < 5 ? prev + 1 : 5)); // only goes to step 5
-        }, 20000); // advance every...
+        }, 2000000); // advance every...
       
         return () => clearInterval(interval);
       }, []);
+
+
+      const [isLoading, setIsLoading] = useState(true);
+
+      useEffect(() => {
+        const timer = setTimeout(() => {
+          setIsLoading(false);
+        }, 5000);
+      
+        return () => clearTimeout(timer); // cleanup on unmount
+      }, []);      
+
 
     // set text in box
     const getNarrativeText = () => {
         switch (animationPhase) {
             case 0:
-                return "Let's begin! Before anything, I need to break down your story into smaller parts because it helps me process faster. I call these 'tokens' ! in your world, you'd basically call them words.";
+                return "Let's begin!! Here's your input. Before anything, I need to break down your message into smaller chunks, like words. This helps me process information faster. Then, I turn your words into my own language, I call these 'tokens'! What you're witnessing are your words being tokenized so that I can understand exactly what you're saying.";
             case 1:
                 return "Right, you wrote just enough for me to understand your personal experience! thanks for that. Now, I need to translate these tokens into a language that I can understand. I will describe each tokens with labels like definitions. That way, my brain can understand what you're trying to say.";
             case 2:
@@ -36,7 +52,7 @@ export default function ParticlesTest() {
 
       const getNarrativeTitle = () => {
         switch (animationPhase) {
-          case 0: return 'READING YOUR STORY';
+          case 0: return 'WORDS TO TOKENS';
           case 1: return 'TRANSLATING YOUR WORDS TO MY LANGUAGE';
           case 2: return 'EXTRACTING INFORMATION';
           case 3: return 'COLORING SIMILAR INFORMATION';
@@ -51,15 +67,24 @@ export default function ParticlesTest() {
     
     return (
         <main className='bg-black text-white h-screen w-full flex items-center justify-center'>
-            <NarrativeTextBox 
+           {isLoading ? (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
+              <Loader />
+            </div>
+            
+          ) : (
+            <>
+              <NarrativeTextBox 
                 text={getNarrativeText()}
                 isVisible={animationPhase >= 0}
                 title={getNarrativeTitle()}
                 animationPhase={animationPhase}
                 onNext={handleNext}
             />
-            <AnimationIn/>
-            <Particles text={input400} />
+            <AnimationIn direction='side'/>
+            <NeuralNetworkParticles  />
+            </>
+          )}
         </main>
     );
 }

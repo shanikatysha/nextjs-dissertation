@@ -9,7 +9,7 @@ type Props = {
   text: string;
 };
 
-export default function ParticleText({ text }: Props) {
+export default function ParticleFlashing({ text }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,6 +30,8 @@ export default function ParticleText({ text }: Props) {
     controls.dampingFactor = 0.05;
     controls.minDistance = 100;
     controls.maxDistance = 800;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 1.0;
 
     // 2D canvas to draw text
     const canvas = document.createElement('canvas');
@@ -116,17 +118,8 @@ export default function ParticleText({ text }: Props) {
     let shouldDisperse = false;
     setTimeout(() => {
       shouldDisperse = true;
-    }, 15000);
+    }, 10);
 
-    // Helper: generate a random rainbow color
-    function getRandomRainbowColor() {
-      const hue = Math.random(); // 0 to 1
-      const saturation = 0.6;
-      const lightness = 0.6;
-      const color = new THREE.Color();
-      color.setHSL(hue, saturation, lightness);
-      return color;
-    }
     let flashTime = 0;
 
     const animate = () => {
@@ -134,19 +127,23 @@ export default function ParticleText({ text }: Props) {
 
       if (shouldDisperse) {
         const pos = geometry.attributes.position.array as Float32Array;
-        const damping = 0.995; // slows them down over time
+        const damping = 0.99; // slows them down over time
 
         for (let i = 0; i < pos.length; i += 3) {
           velocities[i] *= damping;
           velocities[i + 1] *= damping;
           velocities[i + 2] *= damping;
         
-          pos[i] += velocities[i] * 0.2;
-          pos[i + 1] += velocities[i + 1] * 0.6;
-          pos[i + 2] += velocities[i + 2] * 0.9;
+          pos[i] += velocities[i] * 1;
+          pos[i + 1] += velocities[i + 1] * 2;
+          pos[i + 2] += velocities[i + 2] * 3;
                 }
         geometry.attributes.position.needsUpdate = true;
       }
+        flashTime += 0.005;
+        const hue = flashTime % 1; // keep between 0-1
+        material.color.setHSL(hue, 0.6, 0.6);
+
       renderer.render(scene, camera);
       controls.update();
     };

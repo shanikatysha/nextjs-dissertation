@@ -6,8 +6,11 @@ import TypingText from './components/typing-comp';
 import SleekInput from './components/input-name';
 import BigTextInput from './components/input-answer';
 import Particles from './components/particles';
+import ParticlesFlashing from './components/particles-flashing';
+import NeuralNetworkParticles from './components/neural-network';
 import AnimationIn from './components/rectangle-slide';
 import NarrativeTextBox from './components/narrative-box';
+import Loader from './components/loading-heartbeat';
 
 function useAutoAdvance(
   stepNumber: number, 
@@ -26,11 +29,13 @@ function useAutoAdvance(
 export default function Home() {
   const [animationPhase, setAnimationPhase] = useState(-1); //narrative box phase
   const [showNarrative, setShowNarrative] = useState(false); // narrative box visibility
+  // loading
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setAnimationPhase((prev) => (prev < 5 ? prev + 1 : 5)); // only goes to step 5
-    }, 30000); // advance narrative every...
+      setAnimationPhase((prev) => (prev < 8 ? prev + 1 : 8)); // only goes to step 5
+    }, 1000 * 60 * 60 * 24 * 365 * 100); // advance narrative every...
   
     return () => clearInterval(interval);
   }, []);
@@ -39,11 +44,11 @@ export default function Home() {
   const getNarrativeText = () => {
     switch (animationPhase) {
         case 0:
-            return "Let's begin! Before anything, I need to break down your story into smaller parts because it helps me process faster. I call these 'tokens' ! in your world, you'd basically call them words.";
+          return "Let's begin!! Here's your input. Before anything, I need to break down your message into smaller chunks, like words. This helps me process information faster. Then, I turn your words into my own language, I call these 'tokens'! What you're witnessing are your words being tokenized so that I can understand exactly what you're saying.";
         case 1:
-            return "Right, you wrote just enough for me to understand your personal experience! thanks for that. Now, I need to translate these tokens into a language that I can understand. I will describe each tokens with labels like definitions. That way, my brain can understand what you're trying to say.";
+            return "[Displaying colorful brainwaves........] Now, these colors mean that I'm embedding your words! Each tokens gets converted into a bunch of numbers called vectors that represent its meaning. This is how the my network can actually digest and work with the words - it needs everything as numbers.";
         case 2:
-            return "Now that I understand everything, I will start analyzing your story. Hmmm, I see that your story make sense given your...";
+            return "[Building neural network........] Now that 'similar' tokens are positioned close to each other, the encoder figures out how all the words relate to each other - building links! It understands that 'AI' and 'future' connect to mean predictions about artificial intelligence";
         case 3:
             return "I'm identifying patterns in your story, and I think I know how you feel. I'll group similar patterns together so I can analyze better. Here! you can see the different colors representing each emotions you felt!";
         case 4:
@@ -55,9 +60,9 @@ export default function Home() {
 
   const getNarrativeTitle = () => {
     switch (animationPhase) {
-      case 0: return 'READING YOUR STORY';
-      case 1: return 'TRANSLATING YOUR WORDS TO MY LANGUAGE';
-      case 2: return 'EXTRACTING INFORMATION';
+      case 0: return 'WORDS TO TOKENS';
+      case 1: return 'EMBEDDING TOKENS WITH MEANINGS';
+      case 2: return 'BUILDING LINKS BETWEEN TOKENS';
       case 3: return 'COLORING SIMILAR INFORMATION';
       case 4: return 'ANALYZING COMPLETE!';
       default: return '';
@@ -65,7 +70,8 @@ export default function Home() {
   };
 
   const handleNext = () => {
-    setAnimationPhase(prev => (prev < 5 ? prev + 1 : prev));
+    setAnimationPhase(prev => (prev < 8 ? prev + 1 : prev));
+    nextStep();
   };
 
   const [currentStep, setCurrentStep] = useState(0);
@@ -78,6 +84,7 @@ export default function Home() {
   useAutoAdvance(4, 3000, currentStep, nextStep);
   useAutoAdvance(5, 1000 * 60 * 60 * 24 * 365 * 100, currentStep, nextStep);
   useAutoAdvance(6, 1000 * 60 * 60 * 24 * 365 * 100, currentStep, nextStep);
+  useAutoAdvance(7, 1000 * 60 * 60 * 24 * 365 * 100, currentStep, nextStep);
 
   const [submittedName, setSubmittedName] = useState<string | null>(null);
   const handleNameSubmit = (name: string) => {
@@ -98,14 +105,16 @@ export default function Home() {
     setSecondAnswer(secondAnswer);
     console.log(currentStep, ' Answer 2 submitted:', secondAnswer);
     nextStep();
+    setIsLoading(true);
 
     const timer = setTimeout(() => {
       setShowNarrative(true);
       setAnimationPhase(0);
-    }, 3000);
+      setIsLoading(false);
+    }, 5000);
 
     return () => clearTimeout(timer);
-  };
+  }; 
   
 
   return (
@@ -167,19 +176,59 @@ export default function Home() {
         </div>
       }
 
-      { currentStep === 7 && 
+      {currentStep === 7 && (
         <div className="w-full h-full min-h-screen flex">
-          <NarrativeTextBox 
+          {isLoading ? (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
+              <Loader />
+            </div>
+          ) : (
+            <>
+              <NarrativeTextBox 
                 text={getNarrativeText()}
                 isVisible={showNarrative}
                 title={getNarrativeTitle()}
                 animationPhase={animationPhase}
                 onNext={handleNext}
-            />
-          <AnimationIn/>
-          <Particles text={`${firstAnswer ?? ''} ${secondAnswer ?? ''}`.trim()} />
+              />
+              <AnimationIn direction='top-down' />
+              <Particles text={`${firstAnswer ?? ''} ${secondAnswer ?? ''}`.trim()} />
+            </>
+          )}
         </div>
-      }
+      )}
+
+      {currentStep === 8 && (
+        <div className="w-full h-full min-h-screen flex">
+          
+              <NarrativeTextBox 
+                text={getNarrativeText()}
+                isVisible={showNarrative}
+                title={getNarrativeTitle()}
+                animationPhase={animationPhase}
+                onNext={handleNext}
+              />
+              <AnimationIn direction='side' />
+              <ParticlesFlashing text={`${firstAnswer ?? ''} ${secondAnswer ?? ''}`.trim()} />
+
+        </div>
+      )}
+
+      {currentStep === 9 && (
+        <div className="w-full h-full min-h-screen flex">
+          
+              <NarrativeTextBox 
+                text={getNarrativeText()}
+                isVisible={showNarrative}
+                title={getNarrativeTitle()}
+                animationPhase={animationPhase}
+                onNext={handleNext}
+              />
+              <AnimationIn direction='side' />
+              <NeuralNetworkParticles />
+
+        </div>
+      )}
 
       
       <div className="max-w-5xl">
