@@ -40,12 +40,12 @@ const BigTextInput: React.FC<ModernInputProps> = ({
             rows={12}
             className={`
               w-full px-8 py-8 text-base text-left leading-6 border-[1px] rounded-4xl resize-none 
-              transition-all duration-300 ease-in-out outline-none placeholder-gray-600 bg-[#1a1a1a]
+              transition-all duration-300 ease-in-out outline-none placeholder-[#2a2a2a] bg-[#0b0b0b]
               ${isFocused || value 
-                ? 'border-gray-800 text-gray-400' 
-                : 'border-gray-800 text-gray-400'
+                ? 'border-[#1d1d1d] text-[#8c8c8c]' 
+                : 'border-[#1d1d1d] text-[#8c8c8c]'
               }
-              hover:border-gray-800 focus:border-gray-900
+              hover:border-[#2b2b2b] focus:border-[#4a4a4a]
             `}
           />
           {/* Word counter */}

@@ -4,7 +4,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #000000;
   --shiny-cta-bg: #161616;
   --shiny-cta-bg-subtle: #1a1818;
   --shiny-cta-fg: #e1e1e1;
@@ -249,4 +249,12 @@ body {
   50% {
     scale: 1.2;
   }
+}
+
+.webgl
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
 }

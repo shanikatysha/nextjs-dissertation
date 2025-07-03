@@ -37,8 +37,8 @@ const ModernInput: React.FC<ModernInputProps> = ({
               w-full px-1 py-6 text-base text-center font-200 bg-transparent border-0 border-b-1 
               transition-all duration-300 ease-in-out outline-none placeholder-gray-600
               ${isFocused || value 
-                ? 'border-gray-800 text-gray-200' 
-                : 'border-gray-800 text-gray-400'
+                ? 'border-[#1d1d1d] text-gray-200' 
+                : 'border-[#1d1d1d] text-gray-400'
               }
               hover:border-gray-800 focus:border-gray-900
             `}
