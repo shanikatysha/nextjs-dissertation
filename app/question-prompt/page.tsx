@@ -37,6 +37,7 @@ export default function Prompt() {
         if (e.key === 'Enter' && e.ctrlKey) {
           e.preventDefault();
           handlePatternAnalysis();
+          console.log(analyzedPatterns);
         }
     };
 

@@ -3,15 +3,21 @@
 import Particles from '../components/particles';
 import ParticlesFlashing from '../components/particles-flashing';
 import NeuralNetworkParticles from '../components/neural-network';
+import ClusterNetworkParticles from '../components/cluster-network';
 import AnimationIn from '../components/rectangle-slide';
 import { useEffect, useRef, useState } from 'react';
 import NarrativeTextBox from '../components/narrative-box';
 import Loader from '../components/loading-heartbeat';
 import Instructions from '../components/instructions';
+import GradientCanvas from '../components/gradient-canvas';
+import ClusterToText from '../components/cluster-totext';
+
+
 
 export default function ParticlesTest() {
     const [animationPhase, setAnimationPhase] = useState(0);
     const input400 = "Shanika stared at the glowing screen, her heart racing with anticipation. The AI art generator she'd been building for months was finally ready for its first real test. Her fingers trembled slightly as she uploaded her personal artwork - five carefully crafted designs that represented years of her creative journey. Part of her buzzed with excitement at the possibilities. This could revolutionize how people express emotions through art. But underneath the thrill, anxiety gnawed at her. What if the AI couldn't capture her unique style? What if months of work had been for nothing? The technology felt both magical and terrifying - a double-edged sword that could either amplify human creativity or replace it entirely. As she watched the neural network analyze her radial energy patterns, Shanika felt a profound sense of vulnerability. She was essentially teaching a machine to think like her, to create like her. The boundary between human and artificial creativity seemed to blur before her eyes, leaving her both amazed and unsettled about the future of artistic expression.Shanika stared at the glowing screen, her heart racing with anticipation. The AI art generator she'd been building for months was finally ready for its first real test. Her fingers trembled slightly as she uploaded her personal artwork - five carefully crafted designs that represented years of her creative journey. Part of her buzzed with excitement at the possibilities. This could revolutionize how people express emotions through art. But underneath the thrill, anxiety gnawed at her. What if the AI couldn't capture her unique style? What if months of work had been for nothing? The technology felt both magical and terrifying - a double-edged sword that could either amplify human creativity or replace it entirely. As she watched the neural network analyze her radial energy patterns, Shanika felt a profound sense of vulnerability. She was essentially teaching a machine to think like her, to create like her. The boundary between human and artificial creativity seemed to blur before her eyes, leaving her both amazed and unsettled about the future of artistic expression. The technology felt both magical and terrifying - a double-edged sword that could either amplify human creativity or replace it entirely. As she watched the neural network analyze her radial energy patterns, Shanika felt a profound sense of vulnerability. The technology felt both magical and terrifying - a double-edged sword that could either amplify human creativity or replace it entirely. As she watched the neural network analyze her radial energy patterns, Shanika felt a profound sense of vulnerability."
+
     useEffect(() => {
         const interval = setInterval(() => {
           setAnimationPhase((prev) => (prev < 5 ? prev + 1 : 5)); // only goes to step 5
@@ -82,7 +88,7 @@ export default function ParticlesTest() {
                 onNext={handleNext}
             />
             <AnimationIn direction='side'/>
-            <NeuralNetworkParticles  />
+            <ClusterToText words={['good','job','tysh lmaooo']}/>
             </>
           )}
         </main>

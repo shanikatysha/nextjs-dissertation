@@ -75,6 +75,11 @@ body {
     blink 1s step-end infinite 2.5s; 
 }
 
+#gradient-canvas {
+  width:100%;
+  height:100%;
+}
+
 @keyframes blink {
   0%, 100% {
     border-color: transparent;
