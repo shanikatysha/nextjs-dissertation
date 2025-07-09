@@ -4,9 +4,10 @@ import NarrativeTextBox from './narrative-box';
 
 type Props = {
   direction: string;
+  time: number;
 };
 
-const SlidingRectangle = ({ direction }: Props) => {
+const SlidingRectangle = ({ direction, time }: Props) => {
   const [isVisible, setIsVisible] = useState(true);
   const [fadeClass, setFadeClass] = useState('opacity-100');
 
@@ -23,7 +24,7 @@ const SlidingRectangle = ({ direction }: Props) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setFadeClass('opacity-0 transition-opacity duration-3000 ease-out');
-    }, 1000); 
+    }, time); 
 
     return () => clearTimeout(timer);
   }, []);

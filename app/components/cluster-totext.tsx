@@ -125,7 +125,7 @@ export default function ClusterToText({ words }: ClusterToTextProps) {
         const particleIndex = start + i;
         const target = textPoints[i % textPoints.length].clone();
     
-        const wordSpacing = 50; // tweak this for how spaced out you want them
+        const wordSpacing = 40; // tweak this for how spaced out you want them
         target.x += (c - 1) * wordSpacing;
         target.y -= (c - 1) * wordSpacing - 20;
     
@@ -223,7 +223,7 @@ export default function ClusterToText({ words }: ClusterToTextProps) {
     }
 
     const cameraStart = camera.position.clone();
-    const cameraZoomOutTarget = new THREE.Vector3(0, 10, 200); // zoomed-out Z position
+    const cameraZoomOutTarget = new THREE.Vector3(0, 10, 150); // zoomed-out Z position
 
     function animate() {
       requestAnimationFrame(animate);

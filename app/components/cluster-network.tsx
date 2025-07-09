@@ -19,6 +19,7 @@ export default function ClusterParticles() {
     const camera = new THREE.PerspectiveCamera(60, width / height, 1, 1000);
     camera.position.x = 200;
     camera.position.y = 200;
+    camera.position.z = 0;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(width, height);

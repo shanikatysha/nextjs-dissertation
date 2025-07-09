@@ -9,7 +9,7 @@ interface ModernInputProps {
 }
 
 const BigTextInput: React.FC<ModernInputProps> = ({
-  placeholder = "Being specific with your answers can help me understand better, so don't hold back on describing how these interactions make you feel...",
+  placeholder = "Write your experience, thoughts, or feelings...",
   onSubmit,
   currentStep,
 }) => {
@@ -40,12 +40,12 @@ const BigTextInput: React.FC<ModernInputProps> = ({
             rows={12}
             className={`
               w-full px-8 py-8 text-base text-left leading-6 border-[1px] rounded-4xl resize-none 
-              transition-all duration-300 ease-in-out outline-none placeholder-[#2a2a2a] bg-[#0b0b0b]
+              transition-all duration-300 ease-in-out outline-none placeholder-[#bcafb0] bg-[#f2e2d6]
               ${isFocused || value 
-                ? 'border-[#1d1d1d] text-[#8c8c8c]' 
-                : 'border-[#1d1d1d] text-[#8c8c8c]'
+                ? 'border-[#E5D4C7] text-[#5D3136]' 
+                : 'border-[#534648] text-[#5D3136]'
               }
-              hover:border-[#2b2b2b] focus:border-[#4a4a4a]
+              hover:border-[#5D3136] focus:border-[#5D3136]
             `}
           />
           {/* Word counter */}
@@ -63,8 +63,8 @@ const BigTextInput: React.FC<ModernInputProps> = ({
                     : `
                     rounded-full transition-all duration-300 ease-in-out
                     ${value.trim()
-                        ? 'text-gray-500 hover:text-gray-100 cursor-pointer opacity-100'
-                        : 'text-gray-800 cursor-not-allowed opacity-50'
+                        ? 'text-[#9B8184] hover:text-[#5D3136] cursor-pointer opacity-100'
+                :         'text-[#E5D4C7] cursor-not-allowed opacity-50'
                     }
                     `}
                 disabled={!value.trim()}

@@ -28,7 +28,7 @@ export default function LinkedParticles() {
     controls.minDistance = 100;
     controls.maxDistance = 800;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 1.0;
+    controls.autoRotateSpeed = 0.5;
 
     // --- PARTICLES SETUP ---
 
@@ -125,9 +125,10 @@ export default function LinkedParticles() {
       lineGeometry.attributes.position.needsUpdate = true;
     }
 
+
     function animate() {
       requestAnimationFrame(animate);
-      lineMaterial.opacity = 0.3 * (0.5 + 0.5 * Math.sin(performance.now() * 0.005)); //blinkingg
+      lineMaterial.opacity = 0.3 * (0.5 + 0.5 * Math.sin(performance.now() * 0.0008)); //blinkingg
       updateLines();
       renderer.render(scene, camera);
       controls.update();

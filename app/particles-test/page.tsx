@@ -11,6 +11,7 @@ import Loader from '../components/loading-heartbeat';
 import Instructions from '../components/instructions';
 import GradientCanvas from '../components/gradient-canvas';
 import ClusterToText from '../components/cluster-totext';
+import TypingText from '../components/typing-comp';
 
 
 
@@ -72,7 +73,7 @@ export default function ParticlesTest() {
       };
     
     return (
-        <main className='bg-black text-white h-screen w-full flex items-center justify-center'>
+        <main className="w-full h-full min-h-screen flex flex-col items-center text-center justify-center">
            {isLoading ? (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
               <Loader />
@@ -80,15 +81,32 @@ export default function ParticlesTest() {
             
           ) : (
             <>
-              <NarrativeTextBox 
-                text={getNarrativeText()}
-                isVisible={animationPhase >= 0}
-                title={getNarrativeTitle()}
-                animationPhase={animationPhase}
-                onNext={handleNext}
-            />
-            <AnimationIn direction='side'/>
-            <ClusterToText words={['good','job','tysh lmaooo']}/>
+              <div className="relative z-80 text-center pb-3 text-[#ffff] text-4xl fade-in ease-in-out vignette">
+  {/* Blurred background */}
+  <div className="absolute inset-0 bg-[#1C1516] backdrop-blur-xl opacity-90 z-0" />
+
+  {/* Foreground content */}
+  <div className="relative z-10 h-full w-full min-w-screen min-h-screen flex-col flex items-center justify-center text-center inconsolata-bold">
+    We've reached the end of our journey together!
+    <div className='text-[24px] leading-8 pl-20 pr-20 pb-12 pt-8 inconsolata-normal'>
+   While we've been chatting, I've been creating something special for you. It's a unique piece of artwork based on the emotions I captured from your experience, my way of saying thank you for sharing with me! Every output is different, so it's completely unique to your stories.
+    </div>
+    
+    <div className="flex flex-row justify-center space-x-15">
+      <button className="hover:underline text-white font-semibold py-8 px-8 border-2 border-white text-4xl">
+        ↵ Replay journey
+      </button>
+      <button className="hover:underline text-white font-semibold py-8 px-8 border-2 border-white text-4xl">
+        Reveal artwork ↳
+      </button>
+    </div>
+  </div>
+</div>
+          
+              <GradientCanvas colors={['#E19147', '#BCBA7E', '#B66D6D', '#F2F0CD']} />
+
+              
+              
             </>
           )}
         </main>

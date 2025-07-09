@@ -1,15 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet');
 @import "tailwindcss";
 
 
 :root {
   --background: #ffffff;
   --foreground: #000000;
-  --shiny-cta-bg: #161616;
-  --shiny-cta-bg-subtle: #1a1818;
-  --shiny-cta-fg: #e1e1e1;
-  --shiny-cta-highlight: rgb(70, 69, 136);
-  --shiny-cta-highlight-subtle: #8484ff;
+  --shiny-cta-bg: #F8E8DC;
+  --shiny-cta-bg-subtle: #dfbead;
+  --shiny-cta-fg: #643c3c;
+  --shiny-cta-highlight: #dec1c3;
+  --shiny-cta-highlight-subtle: #440108;
 }
 
 @property --gradient-angle {
@@ -67,12 +67,13 @@ body {
 
 .text { /* for typing effect */
   width: 29ch; 
-  border-right: 3px solid rgb(82, 82, 82);
+  border-right: 2px solid rgb(155, 129, 132);
   overflow: hidden;
-  white-space: nowrap;
+  white-space: normal;
+  word-wrap: break-word;
   animation: 
-    type 2.5s steps(29) forwards,
-    blink 1s step-end infinite 2.5s; 
+    type 5s steps(50) forwards,
+    blink 2s step-end 3 2.5s; 
 }
 
 #gradient-canvas {
@@ -80,12 +81,49 @@ body {
   height:100%;
 }
 
+.inconsolata-normal {
+  font-family: "Inconsolata", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.inconsolata-bold {
+  font-family: "Inconsolata", monospace;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(0); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 2s ease-out forwards;
+}
+
+.vignette::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 10; /* adjust so it’s above background but below content */
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.5) 100%);
+}
+
+
 @keyframes blink {
   0%, 100% {
     border-color: transparent;
   }
   50% {
-    border-color: rgb(234, 234, 234);
+    border-color: rgb(155, 129, 132);
   }
 }
 
@@ -153,7 +191,7 @@ body {
   height: var(--size);
   background: radial-gradient(
       circle at var(--position) var(--position),
-      white calc(var(--position) / 4),
+      rgb(98, 52, 52) calc(var(--position) / 4),
       transparent 0
     )
     padding-box;

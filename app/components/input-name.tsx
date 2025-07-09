@@ -34,13 +34,13 @@ const ModernInput: React.FC<ModernInputProps> = ({
             onBlur={() => setIsFocused(false)}
             placeholder={isFocused ? '' : placeholder}  // <-- here
             className={`
-              w-full px-1 py-6 text-base text-center font-200 bg-transparent border-0 border-b-1 
-              transition-all duration-300 ease-in-out outline-none placeholder-gray-600
+              w-full px-1 py-6 text-base text-left font-200 bg-transparent border-0 border-b-1 
+              transition-all duration-300 ease-in-out outline-none placeholder-[#9B8184]
               ${isFocused || value 
-                ? 'border-[#1d1d1d] text-gray-200' 
-                : 'border-[#1d1d1d] text-gray-400'
+                ? 'border-[#E5D4C7] text-[#5D3136]' 
+                : 'border-[#E5D4C7] text-[#5D3136]'
               }
-              hover:border-gray-800 focus:border-gray-900
+              hover:border-[#5D3136] focus:border-[#5D3136]
             `}
           />
 
@@ -51,8 +51,8 @@ const ModernInput: React.FC<ModernInputProps> = ({
               absolute right-0 top-1/2 -translate-y-1/2 p-2 rounded-full
               transition-all duration-300 ease-in-out
               ${value.trim()
-                ? 'text-gray-500 hover:text-gray-100 cursor-pointer opacity-100'
-                : 'text-gray-800 cursor-not-allowed opacity-50'
+                ? 'text-[#9B8184] hover:text-[#5D3136] cursor-pointer opacity-100'
+                : 'text-[#E5D4C7] cursor-not-allowed opacity-50'
               }
             `}
             disabled={!value.trim()}
@@ -64,7 +64,7 @@ const ModernInput: React.FC<ModernInputProps> = ({
         {/* Focus line animation */}
         <div 
           className={`
-            absolute bottom-0 left-0 h-[1px] bg-gradient-to-r from-blue-500 to-purple-400
+            absolute bottom-0 left-0 h-[1px] bg-gradient-to-r from-[#5D3136] to-[#5D3136]
             transition-all duration-300 ease-in-out
             ${isFocused ? 'w-full' : 'w-0'}
           `}

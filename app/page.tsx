@@ -39,7 +39,7 @@ export default function Home() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setAnimationPhase((prev) => (prev < 11 ? prev + 1 : 11)); // only goes to step 5
+      setAnimationPhase((prev) => (prev < 11 ? prev + 1 : 12)); // only goes to step 5
     }, 1000 * 60 * 60 * 24 * 365 * 100); // advance narrative every...
   
     return () => clearInterval(interval);
@@ -55,7 +55,7 @@ export default function Home() {
         case 2:
             return "[Building neural network......] Now that 'similar' tokens are positioned close to each other, the encoder figures out how all the words relate to each other - building links! It understands that 'AI' and 'future' connect to mean predictions about artificial intelligence";
         case 3:
-            return "[Activiting silent mode......] Ssshh I need to focus. I will use my attention mechanism to zoom in on the most important parts of your message. It assigns different levels of importance to each word - like highlighting the key words that matter most for understanding what you're asking. These clusters of neural networks means I've identified three common themes from your input!";
+            return "[Activating silent mode......] Ssshh I need to focus. I will use my attention mechanism to zoom in on the most important parts of your message. It assigns different levels of importance to each word - like highlighting the key words that matter most for understanding what you're asking. These clusters of neural networks means I've identified three common themes from your input!";
         case 4:
             return `[Identifying associated emotions.....] Got it! My decoder helped me process your input using all the encoded information so that I can give you the best answer. Then, I turn these tokens back into your language for you to understand. From what I can conclude, you're feeling ${analyzedPatterns?.emotions?.join(', ') || '...'}!`;
         default:
@@ -82,11 +82,11 @@ export default function Home() {
   const [currentStep, setCurrentStep] = useState(0);
 
   const nextStep = () => setCurrentStep(currentStep + 1);
-  useAutoAdvance(0, 3000, currentStep, nextStep);
-  useAutoAdvance(1, 3000, currentStep, nextStep);
+  useAutoAdvance(0, 10000, currentStep, nextStep);
+  useAutoAdvance(1, 10000, currentStep, nextStep);
   useAutoAdvance(2, 1000 * 60 * 60 * 24 * 365 * 100, currentStep, nextStep); //belom handle
-  useAutoAdvance(3, 3000, currentStep, nextStep);
-  useAutoAdvance(4, 3000, currentStep, nextStep);
+  useAutoAdvance(3, 6000, currentStep, nextStep);
+  useAutoAdvance(4, 6000, currentStep, nextStep);
   useAutoAdvance(5, 1000 * 60 * 60 * 24 * 365 * 100, currentStep, nextStep);
   useAutoAdvance(6, 1000 * 60 * 60 * 24 * 365 * 100, currentStep, nextStep);
   useAutoAdvance(7, 1000 * 60 * 60 * 24 * 365 * 100, currentStep, nextStep);
@@ -170,22 +170,26 @@ export default function Home() {
   
 
   return (
-    <div className="h-full min-h-screen flex flex-col items-center justify-center bg-[#000000] text-[#e7e7e7]">
+    <div className="h-full min-h-screen flex flex-col items-center justify-center bg-[#F8E8DC] text-[#5D3136]">
       { currentStep === 0 && 
-        <div className="h-full min-h-screen flex flex-col items-center justify-center">
-          <h1 className="text-4xl font-bold text-center" ><TypingText text="Hello!   " /></h1>
+        <div className="h-full min-h-screen flex flex-col items-center justify-center w-4/5">
+          <h1 className="text-6xl font-normal text-left pl-10 pb-10 inconsolata-bold" ><TypingText text="Hello!" /></h1>
+          <h1 className="text-6xl font-normal text-left leading-20 inconsolata-normal" ><TypingText text="I'm excited you're here. You're about to peek behind the curtain and see how I actually work." /></h1>
         </div>
       }
 
       { currentStep === 1 && 
-        <div className="h-full min-h-screen flex flex-col items-center justify-center">
-          <h1 className="text-4xl font-bold text-center"><TypingText text="Welcome. I'm Iris, you're AI collaborator!   " /></h1>
+        <div className="h-full min-h-screen flex flex-col items-center justify-center w-4/5">
+          <h1 className="text-5xl font-bold text-left pb-8 leading-20 inconsolata-bold"><TypingText text="I'm Iris (the AI) powering this experience! think of me as the brain behind everything you see here." /></h1>
+          <h1 className="text-2xl font-bold text-left pl-10 pb-4 leading-relaxed inconsolata-normal"><TypingText text="I'm what's called a Large Language Model, or LLM for short. I process language, understand context, and generate responses just like I'm doing right now." /></h1>
+          <h1 className="text-2xl font-bold text-left pl-20 inconsolata-normal"><TypingText text="Over the next few minutes, I'll walk you through the fascinating (and sometimes surprising) ways I process information. Let's gooo!" /></h1>
+        
         </div>
       }
 
       { currentStep === 2 && 
         <div className="w-full h-full min-h-screen flex flex-col items-center justify-center max-w-[50vw]">
-          <h1 className="text-4xl font-bold text-center pb-10"><TypingText text="What should I call you?   " /></h1>
+          <h1 className="text-3xl font-bold text-left leading-11 pb-15 inconsolata-normal"><TypingText text="Before we dive in, I'd love to know what to call you. What should I call you?   " /></h1>
           <SleekInput
             onSubmit={handleNameSubmit}
           />
@@ -193,23 +197,25 @@ export default function Home() {
       }
 
       { currentStep === 3 && 
-        <div className="w-full h-full min-h-screen flex flex-col items-center justify-center max-w-[50vw]">
-          <h1 className="text-4xl font-bold text-center pb-10"><TypingText text={`Great! It's nice to meet you, ${submittedName}.`}/></h1>
+        <div className="w-full h-full min-h-screen flex flex-col items-center justify-center max-w-[60vw]">
+          <h1 className="text-6xl font-normal text-left leading-20 inconsolata-normal"><TypingText text={`Great! It's nice to meet you, ${submittedName}.`}/></h1>
         </div>
       }
 
       { currentStep === 4 && 
         <div className="w-full h-full min-h-screen flex flex-col items-center justify-center max-w-[50vw]">
-          <h1 className="text-4xl font-bold text-center pb-10"><TypingText text="Let's get started.   "/></h1>
+          <h1 className="text-6xl font-normal text-left leading-20 inconsolata-normal"><TypingText text="Ready to explore the world of AI from the inside out? Let's begin!"/></h1>
         </div>
       }
 
       { currentStep === 5 && 
-        <div className="w-full h-full min-h-screen flex flex-col items-center justify-center max-w-[50vw]">
-          <h3 className="text-lg text-center text-gray-400 pb-2">
+        <div className="w-full h-full min-h-screen flex flex-col items-center justify-center max-w-[60vw] pt-10">
+          
+          <h3 className="text-xl text-center text-[#440108] pb-1 leading-7 max-w-[50vw] inconsolata-normal">
             <TypingText text="Think about recent conversations you've had about AI-with friends, family, colleagues, or even internal debates with yourself."/>
           </h3>
-          <h1 className='text-3xl leading-11 text-center pb-[80px]'>What do these conversations reveal about your own beliefs, experiences, and feelings toward AI?</h1>
+          <h1 className='text-4xl leading-11 text-center pb-[60px] inconsolata-bold'>
+            <TypingText text="What do these conversations reveal about your own beliefs, experiences, and feelings toward AI?" /></h1>
           <BigTextInput currentStep={currentStep}
             onSubmit={handleFirstSubmit}
           />
@@ -217,11 +223,13 @@ export default function Home() {
       }
 
       { currentStep === 6 && 
-        <div className="w-full h-full min-h-screen flex flex-col items-center justify-center max-w-[50vw]">
-          <h3 className="text-lg text-center text-gray-400 pb-2">
+        <div className="w-full h-full min-h-screen flex flex-col items-center justify-center max-w-[60vw] pt-10">
+          
+          <h3 className="text-xl text-center text-[#440108] pb-1 leading-7 max-w-[50vw] inconsolata-normal">
             <TypingText text="Now, if you're being completely honest about AI's role in your future - both the possibilities that excite you and the developments that worry you."/>
           </h3>
-          <h1 className='text-3xl leading-11 text-center pb-[80px]'>What would that future look like - both the hopes and fears?</h1>
+          <h1 className='text-4xl leading-11 text-center pb-[60px] inconsolata-bold'>
+            <TypingText text="What would that future look like - both the hopes and fears?" /></h1>
           <BigTextInput currentStep={currentStep}
             onSubmit={handleSecondSubmit}
           />
@@ -243,7 +251,7 @@ export default function Home() {
                 animationPhase={animationPhase}
                 onNext={handleNext}
               />
-              <AnimationIn direction='top-down' />
+              <AnimationIn direction='top-down' time={0}/>
               <Particles text={`${firstAnswer ?? ''} ${secondAnswer ?? ''}`.trim()} />
             </>
           )}
@@ -260,7 +268,7 @@ export default function Home() {
                 animationPhase={animationPhase}
                 onNext={handleNext}
               />
-              <AnimationIn direction='side' />
+              <AnimationIn direction='side' time={2000}/>
               <ParticlesFlashing text={`${firstAnswer ?? ''} ${secondAnswer ?? ''}`.trim()} />
 
         </div>
@@ -276,8 +284,8 @@ export default function Home() {
                 animationPhase={animationPhase}
                 onNext={handleNext}
               />
-              <AnimationIn direction='side' />
-              <NeuralNetworkParticles />
+              <AnimationIn direction='side' time={2000}/>
+              <NeuralNetworkParticles /> 
 
         </div>
       )}
@@ -292,7 +300,7 @@ export default function Home() {
                 animationPhase={animationPhase}
                 onNext={handleNext}
               />
-              <AnimationIn direction='side' />
+              <AnimationIn direction='side' time={2000}/>
               <ClusterNetworkParticles />
 
         </div>
@@ -308,21 +316,47 @@ export default function Home() {
                 animationPhase={animationPhase}
                 onNext={handleNext}
               />
-              <AnimationIn direction='side' />
+              <AnimationIn direction='side' time={2000}/>
               <ClusterToText words={analyzedPatterns?.emotions ?? []} />
 
         </div>
       )}
 
       {currentStep === 12 && (
-        <div className="w-full h-full min-h-screen flex flex-col items-center text-center justify-center">
-              <AnimationIn direction='side' />
-              <h1 className="relative z-80 text-3xl text-center pb-3">I'm ready to generate your very own artwork based on your emotions!</h1>
-              <h1 className="relative z-80 text-3xl text-center">Would you like to replay story or continue to generate the artwork?</h1>
-
-              <GradientCanvas colors={analyzedPatterns?.colors ?? []} />
+        <main className='relative'>
+          <div className="absolute inset-0 -z-0">
+    <GradientCanvas colors={analyzedPatterns?.colors ?? []} />
+  </div>
+          <div className="z-20 text-center pb-3 text-[#ffff] text-4xl fade-in ease-in-out vignette">
+            {/* Blurred background */}
+            <div className="absolute inset-0 bg-[#1C1516] backdrop-blur-xl opacity-80 z-0" />
               
-        </div>
+            {/* Foreground content */}
+            <div className="relative z-10 h-full w-full min-w-screen min-h-screen flex-col flex items-center justify-center text-center inconsolata-bold">
+              We've reached the end of our journey together!
+              <div className='text-[24px] leading-8 pl-20 pr-20 pb-12 pt-8 inconsolata-normal'>
+                While we've been chatting, I've been creating something special for you. It's a unique piece of artwork based on the emotions I captured from your experience, my way of saying thank you for sharing with me! Every output is different, so it's completely unique to your stories.
+              </div>
+                  
+              <div className="flex flex-row justify-center space-x-15">
+                <button 
+                  className="hover:underline text-white font-semibold py-8 px-8 border-2 border-white text-4xl"
+                  onClick={() => {
+                    setCurrentStep(7);
+                    setAnimationPhase(0);      // ensures text will show
+                    setShowNarrative(true);    // if it's used to show/hide the box
+                  }}
+                  >
+                      ↵ Replay journey
+                </button>
+                <button className="hover:underline text-white font-semibold py-8 px-8 border-2 border-white text-4xl">
+                      Reveal artwork ↳
+                </button>
+              </div>
+            </div>
+          </div>
+          
+        </main>
       )}
 
 
