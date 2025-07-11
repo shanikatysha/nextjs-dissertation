@@ -81,29 +81,32 @@ export default function ParticlesTest() {
             
           ) : (
             <>
-              <div className="relative z-80 text-center pb-3 text-[#ffff] text-4xl fade-in ease-in-out vignette">
-  {/* Blurred background */}
-  <div className="absolute inset-0 bg-[#1C1516] backdrop-blur-xl opacity-90 z-0" />
-
-  {/* Foreground content */}
-  <div className="relative z-10 h-full w-full min-w-screen min-h-screen flex-col flex items-center justify-center text-center inconsolata-bold">
-    We've reached the end of our journey together!
-    <div className='text-[24px] leading-8 pl-20 pr-20 pb-12 pt-8 inconsolata-normal'>
-   While we've been chatting, I've been creating something special for you. It's a unique piece of artwork based on the emotions I captured from your experience, my way of saying thank you for sharing with me! Every output is different, so it's completely unique to your stories.
-    </div>
-    
-    <div className="flex flex-row justify-center space-x-15">
-      <button className="hover:underline text-white font-semibold py-8 px-8 border-2 border-white text-4xl">
-        ↵ Replay journey
-      </button>
-      <button className="hover:underline text-white font-semibold py-8 px-8 border-2 border-white text-4xl">
-        Reveal artwork ↳
-      </button>
-    </div>
-  </div>
-</div>
-          
-              <GradientCanvas colors={['#E19147', '#BCBA7E', '#B66D6D', '#F2F0CD']} />
+              
+            <div className="relative mt-10 pl-10 pr-10 items-center inconsolata-bold">
+              <div className='flex flex-col items-center justify-between gap-y-12'>
+                <h1 className='text-4xl'>Acknowledgements</h1>
+                <div className='flex flex-row text-left w-4/5 inconsolata-normal gap-x-6'>
+                  <div className='pr-6 pl-6 pt-8 pb-8 border-1 w-3/5'>
+                    <h1 className='text-2xl inconsolata-bold pb-3'>Technology</h1>
+                    <p className='pb-4'>This experience was created using OpenAI GPT-4 for text analysis and my custom 'Aurora' model using Flux + LoRA trained on my original designs for text-to-image generation. These tools demonstrate how multiple AI systems can work together to amplify human creativity. </p>
+                    <p className='pb-4'>The visual animations and processing steps you saw are simplified representations of what's actually happening behind the scenes. Real AI processing involves complex mathematical calculations, pattern matching across millions of data points, and probability predictions that happen in milliseconds.</p>
+                    <p className='pb-4'>The goal is for you to grasp that AI isn't magic - it's a sophisticated but understandable system that analyzes, finds patterns, and generates outputs based on training data.</p>
+                  
+                  </div>
+                  <div className='border-1 items-center'>
+                    <img
+                    src="../images/diagram.png"
+                    alt="Generated artwork"
+                    style={{ maxWidth: "100%", display: 'block', }}
+                    >
+                    </img>
+                    <p className='pb-2 pl-8 pr-8'>The diagram above explains how your input is processed to generate a unique piece of artwork. The prototype you have just experienced demonstrates the future of human-AI creative partnership and personalized AI collaboration.</p>
+                  </div>
+                </div>
+              </div>
+             </div>
+       
+              {/* <GradientCanvas colors={['#E19147', '#BCBA7E', '#B66D6D', '#F2F0CD']} /> */}
 
               
               

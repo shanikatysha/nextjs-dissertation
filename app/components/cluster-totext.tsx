@@ -232,7 +232,7 @@ export default function ClusterToText({ words }: ClusterToTextProps) {
       if (morphing) {
         for (let i = 0; i < particlesData.length; i++) {
           const p = particlesData[i];
-          p.position.lerp(p.target, 0.0009); // control speed here
+          p.position.lerp(p.target, 0.003); // control speed here
           scene.remove(linesMesh);
     
           const i3 = i * 3;
