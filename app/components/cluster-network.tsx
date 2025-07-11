@@ -30,7 +30,7 @@ export default function ClusterParticles() {
     controls.minDistance = 100;
     controls.maxDistance = 800;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 1.0;
+    controls.autoRotateSpeed = 0.5;
     controls.target.set(0, 0, 0);
 
     // --- PARTICLES SETUP ---

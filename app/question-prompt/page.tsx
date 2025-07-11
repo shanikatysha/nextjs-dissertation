@@ -41,20 +41,20 @@ export default function Prompt() {
         }
     };
 
-    const navigateToArtwork = () => {
-      if (!analyzedPatterns) {
-        alert('Please analyze patterns first!');
-        return;
-      }
-      // pass data through URL
-      const params = new URLSearchParams({
-        emotions: JSON.stringify(analyzedPatterns.emotions),
-        colors: JSON.stringify(analyzedPatterns.colors),
-        overallTone: analyzedPatterns.overallTone
-      });
+    // const navigateToArtwork = () => {
+    //   if (!analyzedPatterns) {
+    //     alert('Please analyze patterns first!');
+    //     return;
+    //   }
+    //   // pass data through URL
+    //   const params = new URLSearchParams({
+    //     emotions: JSON.stringify(analyzedPatterns.emotions),
+    //     colors: JSON.stringify(analyzedPatterns.colors),
+    //     overallTone: analyzedPatterns.overallTone
+    //   });
       
-      window.location.href = `/generated-artwork?${params.toString()}`;
-    };
+    //   window.location.href = `/generated-artwork?${params.toString()}`;
+    // };
 
     return (
         <div className="min-h-screen">
@@ -150,9 +150,9 @@ export default function Prompt() {
                       </div>
                       
                     </div>
-                    <button onClick={navigateToArtwork} className="px-6 py-3 rounded-md font-medium">
+                    {/* <button onClick={navigateToArtwork} className="px-6 py-3 rounded-md font-medium">
                       🔍 See artwork...
-                    </button>
+                    </button> */}
                   </div>
                 )}
 

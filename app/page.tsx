@@ -14,6 +14,7 @@ import GradientCanvas from './components/gradient-canvas';
 import AnimationIn from './components/rectangle-slide';
 import NarrativeTextBox from './components/narrative-box';
 import Loader from './components/loading-heartbeat';
+import Artwork from './generated-artwork/content';
 
 function useAutoAdvance(
   stepNumber: number, 
@@ -75,7 +76,7 @@ export default function Home() {
   };
 
   const handleNext = () => {
-    setAnimationPhase(prev => (prev < 10 ? prev + 1 : prev));
+    setAnimationPhase(prev => (prev < 12 ? prev + 1 : prev));
     nextStep();
   };
 
@@ -167,14 +168,13 @@ export default function Home() {
     }
   }, [storyInput]);
   
-  
 
   return (
     <div className="h-full min-h-screen flex flex-col items-center justify-center bg-[#F8E8DC] text-[#5D3136]">
       { currentStep === 0 && 
         <div className="h-full min-h-screen flex flex-col items-center justify-center w-4/5">
-          <h1 className="text-6xl font-normal text-left pl-10 pb-10 inconsolata-bold" ><TypingText text="Hello!" /></h1>
-          <h1 className="text-6xl font-normal text-left leading-20 inconsolata-normal" ><TypingText text="I'm excited you're here. You're about to peek behind the curtain and see how I actually work." /></h1>
+          <h1 className="text-6xl font-normal text-left pl-10 pb-10 inconsolata-bold rotate-text" ><TypingText text="Hello!" /></h1>
+          <h1 className="text-6xl font-normal text-left leading-20 inconsolata-normal" ><TypingText text="I'm excited you're here. You're about to peek behind the curtain and see how AI actually work." /></h1>
         </div>
       }
 
@@ -182,7 +182,7 @@ export default function Home() {
         <div className="h-full min-h-screen flex flex-col items-center justify-center w-4/5">
           <h1 className="text-5xl font-bold text-left pb-8 leading-20 inconsolata-bold"><TypingText text="I'm Iris (the AI) powering this experience! think of me as the brain behind everything you see here." /></h1>
           <h1 className="text-2xl font-bold text-left pl-10 pb-4 leading-relaxed inconsolata-normal"><TypingText text="I'm what's called a Large Language Model, or LLM for short. I process language, understand context, and generate responses just like I'm doing right now." /></h1>
-          <h1 className="text-2xl font-bold text-left pl-20 inconsolata-normal"><TypingText text="Over the next few minutes, I'll walk you through the fascinating (and sometimes surprising) ways I process information. Let's gooo!" /></h1>
+          <h1 className="text-2xl font-bold text-left pl-20 leading-relaxed inconsolata-normal"><TypingText text="Over the next few minutes, I'll walk you through the fascinating (and sometimes surprising) ways I process information. Let's gooo!" /></h1>
         
         </div>
       }
@@ -325,8 +325,8 @@ export default function Home() {
       {currentStep === 12 && (
         <main className='relative'>
           <div className="absolute inset-0 -z-0">
-    <GradientCanvas colors={analyzedPatterns?.colors ?? []} />
-  </div>
+            <GradientCanvas colors={analyzedPatterns?.colors ?? []} />
+          </div>
           <div className="z-20 text-center pb-3 text-[#ffff] text-4xl fade-in ease-in-out vignette">
             {/* Blurred background */}
             <div className="absolute inset-0 bg-[#1C1516] backdrop-blur-xl opacity-80 z-0" />
@@ -343,22 +343,46 @@ export default function Home() {
                   className="hover:underline text-white font-semibold py-8 px-8 border-2 border-white text-4xl"
                   onClick={() => {
                     setCurrentStep(7);
-                    setAnimationPhase(0);      // ensures text will show
-                    setShowNarrative(true);    // if it's used to show/hide the box
+                    setAnimationPhase(0);      
+                    setShowNarrative(true);    
                   }}
                   >
-                      ↵ Replay journey
+                  ↵ Replay journey
                 </button>
-                <button className="hover:underline text-white font-semibold py-8 px-8 border-2 border-white text-4xl">
-                      Reveal artwork ↳
+                <button 
+                className="hover:underline text-white font-semibold py-8 px-8 border-2 border-white text-4xl"
+                onClick={() => {
+                  nextStep();
+                }}>
+                  Reveal artwork ↳
                 </button>
               </div>
             </div>
           </div>
-          
+        </main>
+      )} 
+
+      {currentStep === 13 && analyzedPatterns && (
+        <main className="relative">
+          <div className="absolute inset-0 -z-0">
+            <GradientCanvas colors={analyzedPatterns.colors ?? []} />
+          </div>
+          <div className="z-20 text-[#ffff] fade-in ease-in-out ">
+
+            {/* ✅ Pass props directly */}
+            <Artwork
+              emotions={analyzedPatterns.emotions}
+              colors={analyzedPatterns.colors}
+              overallTone={analyzedPatterns.overallTone}
+            />
+            
+
+            <div className="relative z-10 h-full w-full min-w-screen min-h-screen flex-col flex items-center justify-center text-center inconsolata-bold">
+              
+            </div>
+          </div>
         </main>
       )}
-
 
       
       {/* <div className="max-w-5xl">

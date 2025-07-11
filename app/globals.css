@@ -99,6 +99,20 @@ body {
     "wdth" 100;
 }
 
+@keyframes rotate360 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate-text {
+  display: inline-block;
+  animation: rotate360 5s linear infinite;
+}
+
 @keyframes fadeIn {
   0% { opacity: 0; transform: translateY(0); }
   100% { opacity: 1; transform: translateY(0); }

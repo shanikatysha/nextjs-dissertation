@@ -11,7 +11,10 @@ export default function Page () {
             <div>Loading...</div>
           </div>
         }>
-          <Artwork />
+          {/* <Artwork 
+          emotions={['innovative', 'humble', 'pessimistic']} 
+          colors={['#E19147', '#BCBA7E', '#B66D6D', '#F2F0CD']}
+          overallTone='She is optimistic'/> */}
         </Suspense>
       );
 
