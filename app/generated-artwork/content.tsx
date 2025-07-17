@@ -100,10 +100,10 @@ export default function Artwork ({ emotions, colors, overallTone }: ArtworkProps
     
         </div>
         
-        <div className='w-full mt-40 pl-40 pr-40 flex flex-col items-center gap-y-12'>
+        <div className='w-full mt-100 pl-40 pr-40 flex flex-col items-center gap-y-12'>
           <h1 className='text-4xl'>Acknowledgements</h1>
-          <div className='flex flex-row text-left inconsolata-normal gap-x-6'>
-            <div className='pr-6 pl-6 pt-8 pb-8 border-1 w-3/5'>
+          <div className='flex flex-col text-left inconsolata-normal gap-x-6'>
+            <div className='pr-6 pl-6 pt-8 pb-8 border-1 w-5/5'>
               <h1 className='text-2xl inconsolata-bold pb-3'>Technology</h1>
               <p className='pb-4'>This experience was created using OpenAI GPT-4 for text analysis and my custom 'Aurora' model using Flux + LoRA trained on my original designs for text-to-image generation. These tools demonstrate how multiple AI systems can work together to amplify human creativity. </p>
               <p className='pb-4'>The visual animations and processing steps you saw are simplified representations of what's actually happening behind the scenes. Real AI processing involves complex mathematical calculations, pattern matching across millions of data points, and probability predictions that happen in milliseconds.</p>
@@ -114,7 +114,7 @@ export default function Artwork ({ emotions, colors, overallTone }: ArtworkProps
               <img
               src="../images/diagram.png"
               alt="Generated artwork"
-              style={{ maxWidth: "90%", display: 'block',  margin: '0 auto',}}
+              style={{ maxWidth: "100%", display: 'block',  margin: '0 auto',}}
               >
               </img>
               <p className='pb-2 pl-8 pr-8 pt-6'>The diagram above explains how your input is processed to generate a unique piece of artwork. The prototype you have just experienced demonstrates the future of human-AI creative partnership and personalized AI collaboration.</p>

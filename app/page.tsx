@@ -52,9 +52,9 @@ export default function Home() {
         case 0:
           return "Let's begin!! Here's your input. Before anything, I need to break down your message into smaller chunks, like words. This helps me process information faster. Then, I turn your words into my own language, I call these 'tokens'! What you're witnessing are your words being tokenized so that I can understand exactly what you're saying.";
         case 1:
-            return "[Displaying colorful brainwaves.....] Now, these colors mean that I'm embedding your words! Each tokens gets converted into a bunch of numbers called vectors that represent its meaning. This is how the my network can actually digest and work with the words - it needs everything as numbers.";
+            return "[Displaying colorful brainwaves.....] Now, these colors mean that I'm embedding your words! Each tokens gets converted into a bunch of numbers called vectors that represent its meaning. This is how my network can actually digest and work with the words - it needs everything as numbers.";
         case 2:
-            return "[Building neural network......] Now that 'similar' tokens are positioned close to each other, the encoder figures out how all the words relate to each other - building links! It understands that 'AI' and 'future' connect to mean predictions about artificial intelligence";
+            return "[Building neural network......] Now that 'similar' tokens are positioned close to each other, the encoder figures out how all the words relate to each other - building links! It understands that 'AI' and 'future' connect to mean predictions about artificial intelligence.";
         case 3:
             return "[Activating silent mode......] Ssshh I need to focus. I will use my attention mechanism to zoom in on the most important parts of your message. It assigns different levels of importance to each word - like highlighting the key words that matter most for understanding what you're asking. These clusters of neural networks means I've identified three common themes from your input!";
         case 4:
@@ -83,11 +83,11 @@ export default function Home() {
   const [currentStep, setCurrentStep] = useState(0);
 
   const nextStep = () => setCurrentStep(currentStep + 1);
-  useAutoAdvance(0, 10000, currentStep, nextStep);
-  useAutoAdvance(1, 10000, currentStep, nextStep);
+  useAutoAdvance(0, 20000, currentStep, nextStep);
+  useAutoAdvance(1, 20000, currentStep, nextStep);
   useAutoAdvance(2, 1000 * 60 * 60 * 24 * 365 * 100, currentStep, nextStep); //belom handle
-  useAutoAdvance(3, 6000, currentStep, nextStep);
-  useAutoAdvance(4, 6000, currentStep, nextStep);
+  useAutoAdvance(3, 8000, currentStep, nextStep);
+  useAutoAdvance(4, 8000, currentStep, nextStep);
   useAutoAdvance(5, 1000 * 60 * 60 * 24 * 365 * 100, currentStep, nextStep);
   useAutoAdvance(6, 1000 * 60 * 60 * 24 * 365 * 100, currentStep, nextStep);
   useAutoAdvance(7, 1000 * 60 * 60 * 24 * 365 * 100, currentStep, nextStep);
@@ -334,7 +334,7 @@ export default function Home() {
             {/* Foreground content */}
             <div className="relative z-10 h-full w-full min-w-screen min-h-screen flex-col flex items-center justify-center text-center inconsolata-bold">
               We've reached the end of our journey together!
-              <div className='text-[24px] leading-8 pl-20 pr-20 pb-12 pt-8 inconsolata-normal'>
+              <div className='text-[24px] leading-8 pl-40 pr-40 pb-12 pt-8 inconsolata-normal'>
                 While we've been chatting, I've been creating something special for you. It's a unique piece of artwork based on the emotions I captured from your experience, my way of saying thank you for sharing with me! Every output is different, so it's completely unique to your stories.
               </div>
                   
