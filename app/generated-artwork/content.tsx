@@ -100,7 +100,7 @@ export default function Artwork ({ emotions, colors, overallTone }: ArtworkProps
     
         </div>
         
-        <div className='w-full mt-100 pl-40 pr-40 flex flex-col items-center gap-y-12'>
+        <div className='w-full mt-50 pl-40 pr-40 flex flex-col items-center gap-y-12'>
           <h1 className='text-4xl'>Acknowledgements</h1>
           <div className='flex flex-col text-left inconsolata-normal gap-x-6'>
             <div className='pr-6 pl-6 pt-8 pb-8 border-1 w-5/5'>

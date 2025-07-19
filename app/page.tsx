@@ -83,8 +83,8 @@ export default function Home() {
   const [currentStep, setCurrentStep] = useState(0);
 
   const nextStep = () => setCurrentStep(currentStep + 1);
-  useAutoAdvance(0, 20000, currentStep, nextStep);
-  useAutoAdvance(1, 20000, currentStep, nextStep);
+  useAutoAdvance(0, 25000, currentStep, nextStep);
+  useAutoAdvance(1, 30000, currentStep, nextStep);
   useAutoAdvance(2, 1000 * 60 * 60 * 24 * 365 * 100, currentStep, nextStep); //belom handle
   useAutoAdvance(3, 8000, currentStep, nextStep);
   useAutoAdvance(4, 8000, currentStep, nextStep);

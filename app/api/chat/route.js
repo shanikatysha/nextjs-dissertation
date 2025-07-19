@@ -13,7 +13,7 @@ export async function POST(request) {
       messages: [{
         role: "system", // as a system
         content: `You are an expert at analyzing personal narratives for emotional patterns, themes, conflicts, and relationships. Additionally, you are a color expert who can understand the users' emotions, feelings, and tone and translate them to colors. Analyze the story and return ONLY a valid JSON object (no markdown, no code blocks) with these exact keys:
-        - emotions: array of 3 keywords of emotional patterns (e.g., "ambivalence", "anxiety")
+        - emotions: array of 3 keywords of emotional patterns or feelings (e.g., "ambivalence", "uncertainty")
         - conflicts: array of 3 internal/external conflicts
         - overallTone: a single sentence describing the story's emotional tone
         - colors: array of 4 colors associated with the story's emotional tone using Hex color codes (e.g., "#2596be", "#e28743")
