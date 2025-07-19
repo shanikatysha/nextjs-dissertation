@@ -12,11 +12,11 @@ export async function POST(request) {
       //prompting the AIs job
       messages: [{
         role: "system", // as a system
-        content: `You are an expert at analyzing personal narratives for emotional patterns, themes, conflicts, and relationships. Additionally, you are a color expert who can understand the users' emotions, feelings, and tone and translate them to colors. Analyze the story and return ONLY a valid JSON object (no markdown, no code blocks) with these exact keys:
-        - emotions: array of 3 keywords of emotional patterns or feelings (e.g., "ambivalence", "uncertainty")
-        - conflicts: array of 3 internal/external conflicts
+        content: `You are an expert at analyzing personal narratives for emotional patterns, themes, conflicts, and relationships. Additionally, you are a color expert who can understand the users' emotions, feelings, and tone and translate them to colors. Analyze the following story and extract unique insights specific to this narrative. For colors, avoid generic associations - instead, create a palette that authentically reflects this individual's emotional journey, cultural context, and personal significance mentioned in their story. Analyze the story and return ONLY a valid JSON object (no markdown, no code blocks) with these exact keys:
+        - emotions: array of 3 keywords of distinct emotional patterns or feelings specific to this story (e.g., "ambivalence", "uncertainty")
+        - conflicts: array of 3 internal/external conflicts identified in this narrative
         - overallTone: a single sentence describing the story's emotional tone
-        - colors: array of 4 colors associated with the story's emotional tone using Hex color codes (e.g., "#2596be", "#e28743")
+        - colors: array of 4 hex colors that capture this story's specific emotional journey. Consider the dominant feeling, cultural references mentioned, any emotional transitions, and personal significance. Create a cohesive but varied palette that tells this individual's story through color using ONLY Hex color codes (e.g., "#e28743")
         The JSON object should have these exact structure:
         {
           "emotions": ["emotion1", "emotion2", "emotion3"],

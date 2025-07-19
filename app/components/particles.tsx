@@ -34,7 +34,7 @@ export default function ParticleText({ text }: Props) {
     // 2D canvas to draw text
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d')!;
-    canvas.width = width-400;
+    canvas.width = width-100;
     canvas.height = height-200;
     
 
